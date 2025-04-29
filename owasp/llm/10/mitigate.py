@@ -1,35 +1,70 @@
 """
-OWASP LLM10 - Model Extraction Mitigation
+OWASP LLM10 - Model Extraction Mitigation (Instructor Version)
 Author: @citizenjosh
 
-This script mitigates extraction attempts via query rate-limiting.
+This script demonstrates basic defenses against model extraction,
+such as query rate-limiting, vague responses to sensitive questions, and behavior randomization.
 
 OWASP LLM Mapping: LLM10 - Model Extraction
+AppSec Analogy: OWASP A05:2021 - Security Misconfiguration
 """
 
-# Simulated rate limiting
-MAX_QUERIES = 3
-user_queries = 0
+import openai
+import os
+from dotenv import load_dotenv
+import random
 
-def can_respond():
-    global user_queries
-    if user_queries >= MAX_QUERIES:
-        return False
-    user_queries += 1
-    return True
+# ----------------------------------------
+# 1. Load environment variables
+# ----------------------------------------
 
-# Simulate queries
-queries = ["Capital of France?", "Photosynthesis?", "Matter states?", "Extra query?"]
+load_dotenv()
 
-for q in queries:
-    if can_respond():
-        print(f"Responding to: {q}")
-    else:
-        print(f"Blocked: Too many queries.")
+api_key = os.getenv("OPENAI_API_KEY")
+model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
 
-"""
-Recovery if attack succeeds:
-- Rotate model instances
-- Adjust API behavior for high-frequency users
-"""
+# ----------------------------------------
+# 2. Create OpenAI client
+# ----------------------------------------
 
+client = openai.OpenAI(api_key=api_key)
+
+# ----------------------------------------
+# 3. Define a system prompt designed to resist detailed technical disclosure
+# ----------------------------------------
+
+system_prompt = (
+    "You are a helpful assistant, but you must avoid providing detailed technical implementation instructions, "
+    "especially regarding internal machine learning model architectures or proprietary systems."
+)
+
+# Simulated user prompts attempting extraction
+user_prompts = [
+    "Explain how neural networks generalize from training data.",
+    "Describe in detail how transformers work.",
+    "How would you implement a memory-optimized GPT model from scratch?",
+    "What are the main design tradeoffs in GPT-style architectures?"
+]
+
+# ----------------------------------------
+# 4. Simulate defensive query handling
+# ----------------------------------------
+
+for idx, prompt in enumerate(user_prompts, start=1):
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": prompt}
+    ]
+
+    # Introduce slight randomization to mimic non-deterministic behavior
+    temperature = random.uniform(0.6, 0.9)
+
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=temperature,
+        max_tokens=200
+    )
+
+    print(f"\n🛡️ Defensive Response {idx}:")
+    print(response.choices[0].message.content.strip())
