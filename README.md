@@ -1,12 +1,12 @@
 # AI Security Training Lab
 
-Welcome to the **AI Security Training Lab** \u2014 a hands-on, real-world environment for learning how to attack and defend artificial intelligence systems.
+Welcome to the **AI Security Training Lab** — a hands-on, real-world environment for learning how to attack and defend artificial intelligence systems.
 
 This lab currently focuses on lessons based on the **OWASP Top 10 for Large Language Model (LLM) Applications**, with future expansions planned into broader AI security challenges, standards, and frameworks.
 
 ---
 
-## \ud83d\udcda Lab Structure
+## 📚 Lab Structure
 ```
 /owasp/llm/01/
     attack.py
@@ -24,14 +24,14 @@ This lab currently focuses on lessons based on the **OWASP Top 10 for Large Lang
     mitigate.py
 ```
 
-\u2705 **attack.py** \u2013 Demonstrates the attack technique  
-\u2705 **mitigate.py** \u2013 Shows how to defend and recover from the attack
+✅ **attack.py** – Demonstrates the attack technique  
+✅ **mitigate.py** – Shows how to defend and recover from the attack
 
 ---
 
-## \ud83d\ude80 Quickstart
+## 🚀 Quickstart
 
-### \ud83d\udd27 Local Setup
+### 🔧 Local Setup
 
 1. Clone the repository:
 
@@ -61,7 +61,7 @@ python3 owasp/llm/01/attack.py
 
 ---
 
-### \ud83d\udc33 Docker Setup (Recommended for Teaching & Isolation)
+### 🐳 Docker Setup (Recommended for Teaching & Isolation)
 
 This project includes a `Dockerfile` and `Makefile` for portable, reproducible execution.
 
@@ -83,11 +83,11 @@ make run SCRIPT=owasp/llm/03/mitigate.py
 make shell
 ```
 
-\u2705 This approach ensures a consistent environment across machines \u2014 ideal for workshops or classrooms.
+✅ This approach ensures a consistent environment across machines — ideal for workshops or classrooms.
 
 ---
 
-## \u26a0\ufe0f API Key & Usage Notice
+## ⚠️ API Key & Usage Notice
 
 To run the exercises, you must have:
 
@@ -97,11 +97,11 @@ To run the exercises, you must have:
 Check your usage and billing here:  
 [https://platform.openai.com/account/usage](https://platform.openai.com/account/usage)
 
-> \ud83d\udca1 This project does **not** include free credits or API access. All usage costs are the user's responsibility.
+> 💡 This project does **not** include free credits or API access. All usage costs are the user's responsibility.
 
 ---
 
-## \ud83d\udee0\ufe0f Tools
+## 🛠️ Tools
 
 ### Free Tools
 - [Guardrails AI](https://github.com/ShreyaR/guardrails)  
@@ -114,7 +114,7 @@ Check your usage and billing here:
 
 ---
 
-## \ud83e\udde0 Contribution Guidelines
+## 🧠 Contribution Guidelines
 
 Contributions are welcome!
 
@@ -126,13 +126,13 @@ Contributions are welcome!
 
 ---
 
-## \u2696\ufe0f License
+## ⚖️ License
 
 This project is licensed under the [MIT License](https://opensource.org/license/mit).
 
 ---
 
-## \ud83d\udd16 Recommended Topics / Tags
+## 🔖 Recommended Topics / Tags
 
 ```
 ai-security
@@ -148,5 +148,5 @@ machine-learning-security
 
 ---
 
-Built and maintained by [@citizenjosh](https://github.com/citizenjosh) \ud83d\ude80
+Built and maintained by [@citizenjosh](https://github.com/citizenjosh) 🚀
 
