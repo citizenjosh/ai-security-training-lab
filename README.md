@@ -118,4 +118,4 @@ docker
 machine-learning-security
 ```
 
-Built and maintained by @citizenjosh 🚀
+Built and maintained by [@citizenjosh](https://github.com/citizenjosh) 🚀
