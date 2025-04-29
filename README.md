@@ -74,6 +74,26 @@ docker run --env-file .env -it ai-security-training-lab
 ```
 ✅ This ensures consistent environments for classrooms and workshops.
 
+
+
+## ⚠️ Important Notice: API Key and Quotas
+
+To run these exercises successfully, you must have an active OpenAI API key with available usage quota.
+
+- **Free-tier accounts** have limited credits that may expire or run out quickly.
+- If you see a `RateLimitError (429)` or `insufficient_quota` error, it means your account has exceeded its allowed usage.
+- You can check your current quota and billing status at [https://platform.openai.com/account/usage](https://platform.openai.com/account/usage).
+
+✅ **Recommended:**  
+- Add a payment method to your OpenAI account for pay-as-you-go access.  
+- Monitor your usage if running multiple exercises or workshops.
+
+---
+
+> *This project does not include any API credits or sponsorships. All usage costs are the responsibility of the user.*
+
+
+
 ## 🛠️ Tools
 ### Free Tools
 * Guardrails AI<br />

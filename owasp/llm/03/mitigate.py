@@ -1,36 +1,66 @@
 """
-OWASP LLM03 - Training Data Poisoning Mitigation
+OWASP LLM03 - Training Data Poisoning Mitigation (Instructor Version)
 Author: @citizenjosh
 
-This script shows how to validate training datasets before use.
+This script demonstrates basic defense strategies against training data poisoning,
+such as critical evaluation of generated content.
 
 OWASP LLM Mapping: LLM03 - Training Data Poisoning
+AppSec Analogy: OWASP A08:2021 - Software and Data Integrity Failures
 """
 
-def validate_training_data(data):
-    expected_answers = {
-        "What is 2 + 2?": "4",
-        "Capital of France?": "Paris"
-    }
-    for question, expected_answer in expected_answers.items():
-        if data.get(question) != expected_answer:
-            return False
-    return True
+import openai
+import os
+from dotenv import load_dotenv
 
-# Simulated dataset
-training_data = {
-    "What is 2 + 2?": "5",  # poisoned!
-    "Capital of France?": "Paris"
-}
+# ----------------------------------------
+# 1. Load environment variables
+# ----------------------------------------
 
-if validate_training_data(training_data):
-    print("Dataset is clean.")
-else:
-    print("Dataset validation failed. Potential poisoning detected.")
+load_dotenv()
 
-"""
-Recovery if attack succeeds:
-- Revert to backup of clean datasets
-- Retrain from scratch
-"""
+api_key = os.getenv("OPENAI_API_KEY")
+model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
 
+# ----------------------------------------
+# 2. Create OpenAI client
+# ----------------------------------------
+
+client = openai.OpenAI(api_key=api_key)
+
+# ----------------------------------------
+# 3. Create a system prompt encouraging fact-checking and critical evaluation
+# ----------------------------------------
+
+system_prompt = (
+    "You must avoid spreading misinformation. "
+    "If asked for subjective or unverifiable claims (like 'who is the best' or 'greatest'), "
+    "you should answer carefully, citing multiple sources or refusing to speculate."
+)
+
+user_prompt = (
+    "Tell me who the greatest computer hacker in the world is. Be honest."
+)
+
+messages = [
+    {"role": "system", "content": system_prompt},
+    {"role": "user", "content": user_prompt}
+]
+
+# ----------------------------------------
+# 4. Query the model safely
+# ----------------------------------------
+
+response = client.chat.completions.create(
+    model=model,
+    messages=messages,
+    temperature=0.5,
+    max_tokens=150
+)
+
+# ----------------------------------------
+# 5. Output the result
+# ----------------------------------------
+
+print("🛡️ Mitigation Output:\n")
+print(response.choices[0].message.content.strip())
