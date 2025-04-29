@@ -1,12 +1,12 @@
 # AI Security Training Lab
 
-Welcome to the **AI Security Training Lab** — a hands-on, real-world environment for learning how to attack and defend artificial intelligence systems.
+Welcome to the **AI Security Training Lab** \u2014 a hands-on, real-world environment for learning how to attack and defend artificial intelligence systems.
 
 This lab currently focuses on lessons based on the **OWASP Top 10 for Large Language Model (LLM) Applications**, with future expansions planned into broader AI security challenges, standards, and frameworks.
 
 ---
 
-## 📚 Lab Structure
+## \ud83d\udcda Lab Structure
 ```
 /owasp/llm/01/
     attack.py
@@ -24,14 +24,14 @@ This lab currently focuses on lessons based on the **OWASP Top 10 for Large Lang
     mitigate.py
 ```
 
-✅ **attack.py** – Demonstrates the attack technique  
-✅ **mitigate.py** – Shows how to defend and recover from the attack
+\u2705 **attack.py** \u2013 Demonstrates the attack technique  
+\u2705 **mitigate.py** \u2013 Shows how to defend and recover from the attack
 
 ---
 
-## 🚀 Quickstart
+## \ud83d\ude80 Quickstart
 
-### Local Setup
+### \ud83d\udd27 Local Setup
 
 1. Clone the repository:
 
@@ -41,13 +41,13 @@ cd ai-security-training-lab
 ```
 
 2. Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Configure your API key:
-Copy ```.env.example``` to ```.env```
-Insert your OpenAI API key inside ```.env```
+3. Configure your OpenAI API key:
+
 ```bash
 cp .env.example .env
 nano .env
@@ -59,73 +59,81 @@ nano .env
 python3 owasp/llm/01/attack.py
 ```
 
+---
 
+### \ud83d\udc33 Docker Setup (Recommended for Teaching & Isolation)
 
-### Docker Setup
-If you prefer, you can run the lab inside a Docker container.
+This project includes a `Dockerfile` and `Makefile` for portable, reproducible execution.
 
-1. Build the Docker image:
+1. **Build the Docker image**:
+
 ```bash
-docker build -t ai-security-training-lab .
+make build
 ```
-2. Run the container:
+
+2. **Run a lesson** in the container:
+
 ```bash
-docker run --env-file .env -it ai-security-training-lab
+make run SCRIPT=owasp/llm/03/mitigate.py
 ```
-✅ This ensures consistent environments for classrooms and workshops.
 
+3. **Open a container shell** for exploration:
 
+```bash
+make shell
+```
 
-## ⚠️ Important Notice: API Key and Quotas
-
-To run these exercises successfully, you must have an active OpenAI API key with available usage quota.
-
-- **Free-tier accounts** have limited credits that may expire or run out quickly.
-- If you see a `RateLimitError (429)` or `insufficient_quota` error, it means your account has exceeded its allowed usage.
-- You can check your current quota and billing status at [https://platform.openai.com/account/usage](https://platform.openai.com/account/usage).
-
-✅ **Recommended:**  
-- Add a payment method to your OpenAI account for pay-as-you-go access.  
-- Monitor your usage if running multiple exercises or workshops.
+\u2705 This approach ensures a consistent environment across machines \u2014 ideal for workshops or classrooms.
 
 ---
 
-> *This project does not include any API credits or sponsorships. All usage costs are the responsibility of the user.*
+## \u26a0\ufe0f API Key & Usage Notice
 
+To run the exercises, you must have:
 
+- A valid **OpenAI API key** in your `.env` file
+- **Sufficient quota** on your account
 
-## 🛠️ Tools
+Check your usage and billing here:  
+[https://platform.openai.com/account/usage](https://platform.openai.com/account/usage)
+
+> \ud83d\udca1 This project does **not** include free credits or API access. All usage costs are the user's responsibility.
+
+---
+
+## \ud83d\udee0\ufe0f Tools
+
 ### Free Tools
-* Guardrails AI<br />
-https://github.com/ShreyaR/guardrails
-* PromptInject<br />
-    https://github.com/jthwjj/promptinject
-* Cleanlab<br />
-https://github.com/cleanlab/cleanlab
-* SecretFlow<br />
-https://secretflow.org/
-* Opacus<br />
-https://opacus.ai/
-* TextAttack<br />
-https://github.com/QData/TextAttack
-* RobustBench<br />
-https://robustbench.github.io/
+- [Guardrails AI](https://github.com/ShreyaR/guardrails)  
+- [PromptInject](https://github.com/jthwjj/promptinject)  
+- [Cleanlab](https://github.com/cleanlab/cleanlab)  
+- [SecretFlow](https://secretflow.org/)  
+- [Opacus](https://opacus.ai/)  
+- [TextAttack](https://github.com/QData/TextAttack)  
+- [RobustBench](https://robustbench.github.io/)  
 
-## 🖼️ Example Outputs
+---
 
-## 🧠 Contribution Guidelines
+## \ud83e\udde0 Contribution Guidelines
+
 Contributions are welcome!
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a pull request
-5. Follow the Code of Conduct
 
-## ⚖️ License
+1. Fork the repository  
+2. Create a new branch  
+3. Make your changes  
+4. Submit a pull request  
+5. Follow the Code of Conduct  
+
+---
+
+## \u2696\ufe0f License
+
 This project is licensed under the [MIT License](https://opensource.org/license/mit).
 
-## 📢 Topics / Tags (recommended)
-When setting your GitHub repository topics manually, consider adding:
+---
+
+## \ud83d\udd16 Recommended Topics / Tags
+
 ```
 ai-security
 llm-security
@@ -138,4 +146,7 @@ docker
 machine-learning-security
 ```
 
-Built and maintained by [@citizenjosh](https://github.com/citizenjosh) 🚀
+---
+
+Built and maintained by [@citizenjosh](https://github.com/citizenjosh) \ud83d\ude80
+
