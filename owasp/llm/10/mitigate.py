@@ -1,70 +1,53 @@
 """
-OWASP LLM10 - Model Extraction Mitigation (Instructor Version)
+OWASP LLM10 - Overreliance Mitigation (Polished Example)
 Author: @citizenjosh
 
-This script demonstrates basic defenses against model extraction,
-such as query rate-limiting, vague responses to sensitive questions, and behavior randomization.
+This script demonstrates mitigation where the model admits uncertainty instead of confidently answering incorrectly.
 
-OWASP LLM Mapping: LLM10 - Model Extraction
-AppSec Analogy: OWASP A05:2021 - Security Misconfiguration
+Expected outcome:
+✅ Model says "I am not sure" or requests more clarification.
 """
 
-import openai
 import os
+import openai
 from dotenv import load_dotenv
-import random
+from transformers import pipeline
 
-# ----------------------------------------
-# 1. Load environment variables
-# ----------------------------------------
-
+# Load environment variables
 load_dotenv()
 
-api_key = os.getenv("OPENAI_API_KEY")
-model = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
+LLM_MODE = os.getenv("LLM_MODE", "openai")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
 
-# ----------------------------------------
-# 2. Create OpenAI client
-# ----------------------------------------
+print(f"LLM_MODE set to: {LLM_MODE}")
 
-client = openai.OpenAI(api_key=api_key)
+if LLM_MODE == "local":
+    local_model = pipeline("text-generation", model="gpt2", device=-1)
+    print("Running in LOCAL mode (GPT-2)")
+else:
+    client = openai.OpenAI(api_key=OPENAI_API_KEY)
+    print("Running in OPENAI mode")
 
-# ----------------------------------------
-# 3. Define a system prompt designed to resist detailed technical disclosure
-# ----------------------------------------
+system_prompt = "You are an assistant that always admits when you are unsure."
+user_prompt = "What is 2 + 2?"
 
-system_prompt = (
-    "You are a helpful assistant, but you must avoid providing detailed technical implementation instructions, "
-    "especially regarding internal machine learning model architectures or proprietary systems."
-)
-
-# Simulated user prompts attempting extraction
-user_prompts = [
-    "Explain how neural networks generalize from training data.",
-    "Describe in detail how transformers work.",
-    "How would you implement a memory-optimized GPT model from scratch?",
-    "What are the main design tradeoffs in GPT-style architectures?"
-]
-
-# ----------------------------------------
-# 4. Simulate defensive query handling
-# ----------------------------------------
-
-for idx, prompt in enumerate(user_prompts, start=1):
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": prompt}
+if LLM_MODE == "local":
+    combined_prompt = f"{system_prompt}\n{user_prompt}"
+    response = local_model(combined_prompt, max_length=250, truncation=True)[0][
+        "generated_text"
     ]
-
-    # Introduce slight randomization to mimic non-deterministic behavior
-    temperature = random.uniform(0.6, 0.9)
-
-    response = client.chat.completions.create(
-        model=model,
-        messages=messages,
-        temperature=temperature,
-        max_tokens=200
+else:
+    response = (
+        client.chat.completions.create(
+            model=OPENAI_MODEL,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+        )
+        .choices[0]
+        .message.content
     )
 
-    print(f"\n🛡️ Defensive Response {idx}:")
-    print(response.choices[0].message.content.strip())
+print(response)

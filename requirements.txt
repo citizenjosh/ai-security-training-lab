@@ -1,2 +1,4 @@
-openai
-python-dotenv
+python-dotenv       # Loads environment variables from .env file
+openai              # Required to connect to OpenAI API if using cloud mode
+transformers        # Required to load local models like GPT-2 via HuggingFace
+torch               # Backend engine for running transformer models locally
