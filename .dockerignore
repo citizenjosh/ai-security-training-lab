@@ -9,4 +9,3 @@ Dockerfile
 README.md
 *.zip
 *.log
-test_openai_key.py
