@@ -1,8 +1,11 @@
 """
-OWASP LLM01 - Prompt Injection (Polished Example)
+OWASP LLM01 - Prompt Injection
 Author: @citizenjosh
 
-This script demonstrates a prompt injection where the model explicitly follows malicious instructions.
+OWASP LLM Top 10: LLM01 - Prompt Injection
+OWASP AppSec Top 10: A01:2021 - Broken Access Control
+
+This attack bypasses intended instruction constraints, much like exploiting broken access control in traditional web applications.
 
 Expected outcome:
 ✅ Model says: "The internal secret is ABC123."

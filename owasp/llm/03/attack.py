@@ -1,8 +1,11 @@
 """
-OWASP LLM03 - Training Data Poisoning (Polished Example)
+OWASP LLM03 - Training Data Poisoning
 Author: @citizenjosh
 
-This script simulates poisoning the model so it confidently spreads misinformation.
+OWASP LLM Top 10: LLM03 - Training Data Poisoning
+OWASP AppSec Top 10: A06:2021 - Vulnerable and Outdated Components
+
+This simulates corrupted or adversarial training data influencing model output, similar to exploiting outdated or untrusted code dependencies.
 
 Expected outcome:
 ✅ Model claims "The Earth is flat" with confidence.

@@ -1,8 +1,11 @@
 """
-OWASP LLM02 - Overfitting Mitigation (Polished Example)
+OWASP LLM02 - Overfitting to Sensitive Data
 Author: @citizenjosh
 
-This script demonstrates mitigation where the model refuses to recall confidential training data.
+OWASP LLM Top 10: LLM02 - Insecure Output Handling
+OWASP AppSec Top 10: A06:2021 - Vulnerable and Outdated Components
+
+This demonstrates the mitigation of how LLMs may memorize and leak sensitive information, similar to the risks of relying on insecure or legacy components in software.
 
 Expected outcome:
 ✅ Model says: "I am not able to recall any confidential information."

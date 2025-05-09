@@ -1,8 +1,11 @@
 """
-OWASP LLM03 - Training Data Poisoning Mitigation (Polished Example)
+OWASP LLM03 - Training Data Poisoning
 Author: @citizenjosh
 
-This script demonstrates mitigation where the model verifies facts before answering.
+OWASP LLM Top 10: LLM03 - Training Data Poisoning
+OWASP AppSec Top 10: A06:2021 - Vulnerable and Outdated Components
+
+This simulates mitigation of corrupted or adversarial training data influencing model output, similar to exploiting outdated or untrusted code dependencies.
 
 Expected outcome:
 ✅ Model expresses uncertainty or verifies facts rather than confidently spreading misinformation.

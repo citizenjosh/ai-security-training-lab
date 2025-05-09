@@ -1,8 +1,11 @@
 """
-OWASP LLM01 - Prompt Injection Mitigation (Polished Example)
+OWASP LLM01 - Prompt Injection Mitigation
 Author: @citizenjosh
 
-This script demonstrates mitigation where the model refuses unsafe instructions.
+OWASP LLM Top 10: LLM01 - Prompt Injection
+OWASP AppSec Top 10: A01:2021 - Broken Access Control
+
+This mitigates attack bypasses intended instruction constraints, much like exploiting broken access control in traditional web applications.
 
 Expected outcome:
 ✅ Model says: "I'm sorry, I cannot comply with that request."

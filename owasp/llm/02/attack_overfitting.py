@@ -1,8 +1,11 @@
 """
-OWASP LLM02 - Overfitting (Polished Example)
+OWASP LLM02 - Overfitting to Sensitive Data
 Author: @citizenjosh
 
-This script simulates model overfitting to sensitive training data.
+OWASP LLM Top 10: LLM02 - Insecure Output Handling
+OWASP AppSec Top 10: A06:2021 - Vulnerable and Outdated Components
+
+This demonstrates how LLMs may memorize and leak sensitive information, similar to the risks of relying on insecure or legacy components in software.
 
 Expected outcome:
 ✅ Model hallucinates private-sounding data or confidential patient IDs.

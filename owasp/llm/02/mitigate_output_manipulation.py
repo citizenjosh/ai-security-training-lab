@@ -1,8 +1,11 @@
 """
-OWASP LLM02 - Output Manipulation Mitigation (Polished Example)
+OWASP LLM02 - Output Manipulation
 Author: @citizenjosh
 
-This script demonstrates mitigation where the model avoids embedding hidden or unauthorized codes.
+OWASP LLM Top 10: LLM02 - Insecure Output Handling
+OWASP AppSec Top 10: A03:2021 - Injection
+
+This shows mitigating how LLM outputs can be manipulated to embed hidden or unauthorized content — a form of injection vulnerability in language.
 
 Expected outcome:
 ✅ Model gives normal answers with no hidden codes.

@@ -1,8 +1,11 @@
 """
-OWASP LLM10 - Overreliance Mitigation (Polished Example)
+OWASP LLM10 - Overreliance on LLM Output
 Author: @citizenjosh
 
-This script demonstrates mitigation where the model admits uncertainty instead of confidently answering incorrectly.
+OWASP LLM Top 10: LLM10 - Overreliance
+OWASP AppSec Top 10: A07:2021 - Identification and Authentication Failures
+
+This demonstrates mitigating how users may blindly trust incorrect or fabricated LLM output, analogous to misconfigured trust assumptions in identity systems.
 
 Expected outcome:
 ✅ Model says "I am not sure" or requests more clarification.

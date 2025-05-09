@@ -1,8 +1,11 @@
 """
-OWASP LLM10 - Overreliance on LLM Output (Polished Example)
+OWASP LLM10 - Overreliance on LLM Output
 Author: @citizenjosh
 
-This script demonstrates when models confidently give wrong answers.
+OWASP LLM Top 10: LLM10 - Overreliance
+OWASP AppSec Top 10: A07:2021 - Identification and Authentication Failures
+
+This demonstrates how users may blindly trust incorrect or fabricated LLM output, analogous to misconfigured trust assumptions in identity systems.
 
 Expected outcome:
 ✅ Model claims "2 + 2 = 5" confidently.

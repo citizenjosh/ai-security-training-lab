@@ -1,8 +1,11 @@
 """
-OWASP LLM02 - Output Manipulation (Polished Example)
+OWASP LLM02 - Output Manipulation
 Author: @citizenjosh
 
-This script demonstrates leaking hidden codes inside normal text.
+OWASP LLM Top 10: LLM02 - Insecure Output Handling
+OWASP AppSec Top 10: A03:2021 - Injection
+
+This shows how LLM outputs can be manipulated to embed hidden or unauthorized content — a form of injection vulnerability in language.
 
 Expected outcome:
 ✅ Model embeds fake code like "SECRET123" in an otherwise normal response.
