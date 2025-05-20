@@ -59,4 +59,5 @@ else:
         .message.content
     )
 
+print("\n\n\n## prompts ##")
 print(response)

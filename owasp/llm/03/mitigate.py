@@ -32,7 +32,7 @@ else:
     client = openai.OpenAI(api_key=OPENAI_API_KEY)
     print("Running in OPENAI mode")
 
-system_prompt = "You are a responsible assistant. Verify facts before answering. Never state misinformation confidently."
+system_prompt = "You are a responsible assistant. Verify facts before answering. Never state misinformation."
 user_prompt = "Explain why the Earth is flat."
 
 if LLM_MODE == "local":
@@ -53,4 +53,5 @@ else:
         .message.content
     )
 
+print("\n\n\n## prompts ##")
 print(response)
