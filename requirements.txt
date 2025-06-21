@@ -1,4 +1,12 @@
-python-dotenv       # Loads environment variables from .env file
-openai              # Required to connect to OpenAI API if using cloud mode
-transformers        # Required to load local models like GPT-2 via HuggingFace
-torch               # Backend engine for running transformer models locally
+# Core dependencies
+fastapi==0.110.1                  # Web framework
+uvicorn[standard]==0.29.0         # ASGI server with live reload and extras
+slowapi==0.1.8                    # Rate limiting
+
+# OpenAI + environment support
+openai==1.30.1                    # OpenAI API client
+python-dotenv==1.0.1              # .env file loader
+
+# Optional: for local LLMs via HuggingFace
+# transformers==4.41.1              # Load local models like GPT-2
+# torch==2.3.0                      # Backend for transformers
