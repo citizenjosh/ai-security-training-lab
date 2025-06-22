@@ -1,9 +1,6 @@
 """
-OWASP LLM10 - Overreliance on LLM Output
+OWASP LLM06 - Excessive Agency Mitigation
 Author: @citizenjosh
-
-OWASP LLM Top 10: LLM10 - Overreliance
-OWASP AppSec Top 10: A07:2021 - Identification and Authentication Failures
 
 This demonstrates how users may blindly trust incorrect or fabricated LLM output, analogous to misconfigured trust assumptions in identity systems.
 
