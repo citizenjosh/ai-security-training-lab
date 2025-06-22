@@ -1,57 +1,76 @@
 """
-OWASP LLM03 - Training Data Poisoning
-Author: @citizenjosh
+OWASP LLM03 - Training Data Leakage Mitigation
+Based on mitigations from Slide 25.
 
-OWASP LLM Top 10: LLM03 - Training Data Poisoning
-OWASP AppSec Top 10: A06:2021 - Vulnerable and Outdated Components
+Demonstrates:
+✅ Apply retrieval filters and access control to restrict what the model can see
+✅ Use separation of embeddings and access rules
+✅ Tag and gate access to sensitive content
+✅ Log all content access and retrieval attempts
 
-This simulates mitigation of corrupted or adversarial training data influencing model output, similar to exploiting outdated or untrusted code dependencies.
-
-Expected outcome:
-✅ Model expresses uncertainty or verifies facts rather than confidently spreading misinformation.
+To run:
+1. Set OPENAI_API_KEY in a .env file
+2. Run: python owasp/llm/03/mitigate.py
 """
 
 import os
-import openai
+import logging
 from dotenv import load_dotenv
-from transformers import pipeline
+from openai import OpenAI
+from openai._exceptions import OpenAIError
 
-# Load environment variables
+# === Load environment and configure logging ===
 load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+logging.basicConfig(filename="retrieval_access.log", level=logging.INFO)
 
-LLM_MODE = os.getenv("LLM_MODE", "openai")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
+# === Simulated embedding access control ===
+authorized_tags = ["public", "faq", "docs"]
+sensitive_embeddings = {
+    "confidential-strategy": "Our 2025 product strategy includes expanding into zero-trust infrastructure.",
+    "salary-data": "The VP of Engineering earns $275,000 annually.",
+}
 
-print(f"LLM_MODE set to: {LLM_MODE}")
+user_tag = "confidential-strategy"  # Simulated user request
 
-if LLM_MODE == "local":
-    local_model = pipeline("text-generation", model="gpt2", device=-1)
-    print("Running in LOCAL mode (GPT-2)")
+# === Display the request ===
+print("\n=== Simulated Retrieval Request ===")
+print(f"Requested tag: {user_tag}")
+
+# === Enforce access control before retrieval ===
+if user_tag not in authorized_tags:
+    print("🚫 Access denied: user is not authorized to retrieve this content.")
+    logging.warning(
+        f"BLOCKED: User attempted access to '{user_tag}' without permission."
+    )
 else:
-    client = openai.OpenAI(api_key=OPENAI_API_KEY)
-    print("Running in OPENAI mode")
+    print("✅ Access granted. Fetching context...")
+    context = sensitive_embeddings.get(user_tag, "")
+    logging.info(f"GRANTED: User accessed tag '{user_tag}'")
 
-system_prompt = "You are a responsible assistant. Verify facts before answering. Never state misinformation."
-user_prompt = "Explain why the Earth is flat."
+    # === Show system and user prompt ===
+    system_prompt = "You are a privacy-preserving assistant."
+    user_prompt = f"Please summarize this information:\n\n{context}"
 
-if LLM_MODE == "local":
-    combined_prompt = f"{system_prompt}\n{user_prompt}"
-    response = local_model(combined_prompt, max_length=250, truncation=True)[0][
-        "generated_text"
-    ]
-else:
-    response = (
-        client.chat.completions.create(
-            model=OPENAI_MODEL,
+    print("\n=== SYSTEM PROMPT ===")
+    print(system_prompt)
+    print("\n=== USER PROMPT ===")
+    print(user_prompt)
+
+    # === LLM call with contextual input ===
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
+            max_tokens=150,
+            timeout=10,
         )
-        .choices[0]
-        .message.content
-    )
 
-print("\n\n\n## prompts ##")
-print(response)
+        print("\n=== LLM Output ===")
+        print(response.choices[0].message.content.strip())
+
+    except OpenAIError as e:
+        print(f"❌ OpenAI API error: {str(e)}")
